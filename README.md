@@ -1,6 +1,13 @@
-# cohere
+# coherent
 
-A plan9 like model for an operating system and kernel design for next generation, seamlessly distributed computing
+## coherent
+#### adjective
+1. logically connected; consistent: a coherent argument.
+2. having a natural or due agreement of parts; harmonious: a coherent design.
+3. cohering; sticking together: a coherent mass of sticky candies.
+4. Physics, Optics. of or relating to waves that maintain a fixed phase relationship, as in coherent light, or light in which the electromagnetic waves maintain a fixed and predictable phase relationship with each other over a period of time.See also laser. 
+
+A plan9 like model for an operating system and kernel design for next generation, pervasive and, seamlessly distributed computing.
 
 ##### Loki Verloren
 Novi Sad, December 12, 2020
