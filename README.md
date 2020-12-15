@@ -101,3 +101,12 @@ Picture a snaking chain of network cables spaced apart at their break even point
 Thus, if the time to relay the signal between each of those nodes along the path is 1ms, or 1/1,000th of a second, then that's 100,000 * 1,000 or 100 million milliseconds, which is 100,000 seconds, 1666 minutes, 27.777 hours, or a bit more than a day.
 
 > ## sticking to von neumann model eventually escalates to the absurd
+
+So, instead of a big fat kernel, we have a little kernel for each thread of the CPU, and they attempt to efficiently prune the tree of waiting processing tasks based on memory distance (which equals latency and contention) where their data requests go.
+
+At the next layer, we have the device kernels. these demand the highest priority and interact with each kernel using interrupts to monopolise the processor at the moment the data is ready to process. These also migrate across cores also in a way that aims to batch memory accesses more for the processes that are using them. Thus it is a simple heuristic that code and working data will be placed near each other. 
+
+At the micro-level, memory pages of 4kb in size, have a time cost of relocation between cache levels and memory. Processing cannot take place until the smallest caches are populated with working data, so each of the kernels will thus share different parts of the cache levels, divided up pretty much evenly. Instead of shoehorning everything into the 1ms time window of modern preemptive multitasking operating systems, processing is allocated to the most proximate first, which will be based on proximity and total bytes throughput.
+
+Or in other words, processing is opportunistic and instead of one in-between good for nothing specifically value, processes are preempted according to their expenditure of bandwidth. Each process is not given a specific amount of time but a specific amount of bandwidth budget. Moving memory within a cache is the cheapest, between caches is more expensive, to main memory is even more expensive, and to disk, even more expensive, to the cloud, the most expensive.
+
