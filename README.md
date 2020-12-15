@@ -7,7 +7,7 @@ Novi Sad, December 12, 2020
 
 ## The Inspiration
 
-In the process of building ParallelCoin Plan 9 from Crypto Space Hard Fork, in order to facilitate my debugging of concurrent code I wrote a logging library including code location based path filters and eventually a channel-based logger that sends log entries to the process that started it up. 
+In the process of building ParallelCoin Plan 9 from Crypto Space Hard Fork, in order to facilitate my debugging of concurrent code I wrote a logging library including code location based path filters and eventually a channel/pipe-based logger that sends log entries to the process that started it up. 
 
 Attached to that for reasons of necessity - the Windows operating system has no native concept of process signals - the simple logging API had a quit command built into it and then it became clear it needed to be the primary mechanism for keeping control of these little trees of processes. 
 
