@@ -124,9 +124,12 @@ Yes, so each kernel will allocate the time and space in their caches and rebalan
 
 For example, spinlocks are a terribly wasteful way to respond to unpredictable realtime input. There is some tasks that require them, but for everything else there is interrupts, triggered when a data transfer between points has been completed. There is still sadly quite some things that require everything to go all the way to the caches, and back out again, but memory, for example, pretty quickly proved to be a good temporary storage location for programs, and opportunistically transferring it in idle time between spurts of work, so-called Direct Memory Access, is slowly but surely taking over as the preferred way to interface slow things with CPUs.
 
-
+In the interim, bringing this concept to some kind of practical demonstration will prove the wisdom of localism and the quite startling improvements in performance from better multiplexing of resources by the metrics that are widely, and so obviously, called 'costs' without actually using this as the guide to the design of the system.
 
 ### When in doubt, flip a coin
 
 The second factor in the 'scheduling' system is for resolving when two pieces of code have equal weight to fit into a given moment of time. Just as is done with the select statements in Go, if two items or more arrive in the buffer before the scheduler inspects them, Go's runtime basically flips a coin.
 
+Randomisation like this tends to have a counterintuitive effect of actually reducing the congestion and latency of messages passing around. The odds are generally about even especially after a little time building up a map of the hotspots of a piece of code that a coin flip is going to be the right choice. Sometimes the winner is after time, sometimes after throughput. In this way these requirements on average will be equally met, the two sides balancing out against the catastrophic effects that can come from linear systems going into feedback.
+
+People think about scheduling like it's some sort of top-down activity, but actually, the best scheduling is the intersection between the top and the bottom anyway, which is how randomness works. It does not always distribute evenly in time, but being that different processes have different time costs anyway, with randomisation based on data copy cost ...
