@@ -132,4 +132,18 @@ The second factor in the 'scheduling' system is for resolving when two pieces of
 
 Randomisation like this tends to have a counterintuitive effect of actually reducing the congestion and latency of messages passing around. The odds are generally about even especially after a little time building up a map of the hotspots of a piece of code that a coin flip is going to be the right choice. Sometimes the winner is after time, sometimes after throughput. In this way these requirements on average will be equally met, the two sides balancing out against the catastrophic effects that can come from linear systems going into feedback.
 
-People think about scheduling like it's some sort of top-down activity, but actually, the best scheduling is the intersection between the top and the bottom anyway, which is how randomness works. It does not always distribute evenly in time, but being that different processes have different time costs anyway, with randomisation based on data copy cost ...
+People think about scheduling like it's some sort of top-down activity, but actually, the best scheduling is the intersection between the top and the bottom anyway, which is how randomness works. It does not always distribute evenly in time, but being that different processes have different time costs anyway, with randomisation based on data copy cost, in exactly the same cross as you see in marketplaces in price discovery.
+
+## The Layer Cake
+
+So, this is a bullet point form summary of the elements of this design:
+
+1. Each processing thread runs a tiny kernel that manages preempting processes based on their time-and-space cost and available resources using a work-stealing type of strategy to keep all cores evenly utilised.
+
+2. On top of these nanokernels run connectivity kernels, which provide access to motherboard connectivity, buses, network devices, storage devices, and above these are protocol servers for providing the APIs for things like TCP/IP, ARP, BIND, HTTP, NTP, NNTP, FTP, SSH, and so on, reliable broadcast, polkas, IPFS, and so on. This also of course includes the very top surface, user interfaces.
+
+3. Forming the nexus of ownership rights of the computing resources is the hierarchy of users whose identity and privilege is protected not by hidden data but by cryptographic keys protected ultimately by hardened detached signing and keychain management hardware. These trees of delegated keys allow users to precisely specify access to their computing resources.
+
+4. From the root of users and their control rights of the resources is built a secure, multi-user, omnipresent personal cloud that allows the storing, securing and sharing of data, from writing to interactive game environments, software both executable and source code, and everything in between. The physical shape of the internet infrastructure will not fundamentally change, but the ownership structure will, as automation continues to lower the cost of security both on the logistical/tactical/strategic and physical levels, its enforcement will become more and more widespread and efficient. Lost data will be a thing of the past, as will massive leaks of private data from brittle centralised 'decentralised' database silos. 
+
+5. Using best practices and juridical principles, create a network for storing, securing, and distributing to protect against loss an unforgeable ledger of the property titles of an individual, and with the use of advanced cryptographic techniques like zero knowledge and filters and distributed systems systems like cryptocurrency anti-spam mechanisms and economic/game incentives aimed at promoting good faith dealings between people by using every advantage of technology to protect both privacy and security of property rights to the point where trustworthy systems can provide access to adjudicators and analytical tools to crunch down the expensive details and simplify the resolution of conflicting claims.
