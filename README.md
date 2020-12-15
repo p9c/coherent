@@ -70,3 +70,34 @@ Checking authorisation between two communicating processes is done via the same 
 
 ### Kernel
 
+Preemptive multitasking has taken over because of its ability to forcibly correct programming errors. If code causes resources to be exhausted, in a preemptive multitasking system, the kernel can intervene, stop the running process and allow other processes to resume access to them.
+
+Cooperative multitasking depends entirely on the programmer ensuring that when their program is finished with a resource, that it gives it back. 
+
+It helps to refer to processing time as a 'resource' comparable to, for example, frames, pixels, bytes, seconds, or any other means of dividing up capacity. Then you can recognise the similarity between the problem of multitasking on the temporal axis on a very limited number of cores with a limited number of cycles in that time.
+
+Just as the ParallelCoin 9 way parallel block interval remodels the idea of a clock to include a variable schedule, as I observed, it could even be changed to be the progressive values of a random number generator with the seed baked into the genesis block. However, the parallel intervals are better because it forms a connected, elastic 9 body interaction. As any student of physics would be aware, three bodies moving in space affected by both in a mutual interaction produces an endlessly random though recognisable set of phase states distributed through the timeline of the process. 
+
+In terms of combinatorics, the three body problem is no less complex even in two dimensions. Once you have three factors moving in relation to each other, every moment of time and every element has 6 possible vectors, 3 real, 3 imaginary. On the subject of imaginary numbers, they are numbers with the mirror image of arithmetic operations in both time and sequence. Squaring i's roots them, multiplying, divides, and so on and so forth.
+
+The conventional kernel/userland divide is exactly containing the problem within a two body problem. The downside of this approach grows with the number of processing units and the amount of latency of signal between them (usually dictated by spatial position).
+
+The purpose of a kernel is to facilitate the sharing of resources under the control of the CPU so that no process attempts to use a resource at the same time in contradictory ways. Writing different data to the same location of screen, memory, or disk, for example. This is of course the nature of a Von Neumann Engine.
+
+However, in physical hardware, there is an intrinsic level of distribution, of latencies and bandwidth at various scales of distance, and programming even a single CPU die at modern CPU clock speeds results in not just asymptotic rise of resistance, but the need to use synchronisation mechanisms, where previously the time of travel over many relay nodes in the circuit starts to unravel the ivory tower idyllic image of a central processing unit. Just as the atom has increasingly not been proving to be atomic.
+
+### Threads of Execution
+
+In modern 64 bit CPUs there is enormous amounts of the fastest, densest computer memory that exists. The Ryzen processors of the previous generation at writing have 19mb divided up into 3 tiers each one exponentially larger than the next.
+
+Instead of having one kernel in the operating system, each processing thread runs a tiny little kernel, implementing an adaptive scheduling scheme depending on the workload.
+
+Conventional modern operating systems, micro and monolithic kernels both now have 1000hz preemption schedules, a fixed duration, which was 100hz up until about 15 years ago. The value is settled upon as a compromise and interpolation between all use cases or kept uniform where use cases override the raw economics. It sped up because displays got faster, input devices got faster, and network bandwidth grew and latency shrank.
+
+But in fact, there is multiple easy to demonstrate cases where 1000hz is too slow.
+
+Picture a snaking chain of network cables spaced apart at their break even point distance (eg ~100m for CAT-5 STP of typical grade and gauge of copper). Ethernet cables give a good illustration. From pole to pole is approximately 10,000km, or 100k of these little daisy chains improbably stretched across the globe.
+
+Thus, if the time to relay the signal between each of those nodes along the path is 1ms, or 1/1,000th of a second, then that's 100,000 * 1,000 or 100 million milliseconds, which is 100,000 seconds, 1666 minutes, 27.777 hours, or a bit more than a day.
+
+> ## sticking to von neumann model eventually escalates to the absurd
