@@ -108,5 +108,25 @@ At the next layer, we have the device kernels. these demand the highest priority
 
 At the micro-level, memory pages of 4kb in size, have a time cost of relocation between cache levels and memory. Processing cannot take place until the smallest caches are populated with working data, so each of the kernels will thus share different parts of the cache levels, divided up pretty much evenly. Instead of shoehorning everything into the 1ms time window of modern preemptive multitasking operating systems, processing is allocated to the most proximate first, which will be based on proximity and total bytes throughput.
 
+### Opportunistic Randomised Scheduling
+
 Or in other words, processing is opportunistic and instead of one in-between good for nothing specifically value, processes are preempted according to their expenditure of bandwidth. Each process is not given a specific amount of time but a specific amount of bandwidth budget. Moving memory within a cache is the cheapest, between caches is more expensive, to main memory is even more expensive, and to disk, even more expensive, to the cloud, the most expensive.
+
+The only cost for scheduling is then in tracking data throughput. The size of the code segments is immediately available. The operations in the code can be scanned to compute an estimation of the number of times the data will be copied from one place to another, and further refined as it runs, sampling the position within the total executable file, and generating a heat map and computing a cost surface from this.
+
+Some code has extremely tight loops over small pieces of memory, a very good example of this is the treap. With good design, a treap of 4kb can index a considerable amount of data and keep it in order. These searches have a high unit cost of memory copy operations and usually a small amount of arithmetic for index walking. Thus, the scheduler will favour a treap walk operation over a more sparse operation that requires 4x as much memory but half as many read/write cycles, because inside 4kb page of a CPU top level cache, these cycles are thousands of times less than, for example, even just, say, reencoding a text encoding and returning/relaying the result.
+
+By such a scheme of priority, automatically there is a sensible rhythm. A disk read/write cycle of a 4kb page of memory is literally a million times slower on a spinning disk compared to the same page in the fastest, closest caches to the processing cores. So the fast processes will execute thousands of cycles scattered randomly in time, and the slow processes will be also scattered, in the spaces between. The general heuristic is to scatter the smallest the widest, and then allocate into the available space (or time) with gradually bigger pieces.
+
+The result of such a pattern of distribution is automatically favouring the shortest possible time between responses at any given section of the system. The various connection protocol kernels, level 2 of the apiweb kernel, are exactly models of the various connectivity methods available to programs executing on the CPU core. PCI-express, ISA, I2C, ethernet, USB, SATA, memory bus, and so on.
+
+Yes, so each kernel will allocate the time and space in their caches and rebalance it according to its hunger for bandwidth and synchronisation.
+
+For example, spinlocks are a terribly wasteful way to respond to unpredictable realtime input. There is some tasks that require them, but for everything else there is interrupts, triggered when a data transfer between points has been completed. There is still sadly quite some things that require everything to go all the way to the caches, and back out again, but memory, for example, pretty quickly proved to be a good temporary storage location for programs, and opportunistically transferring it in idle time between spurts of work, so-called Direct Memory Access, is slowly but surely taking over as the preferred way to interface slow things with CPUs.
+
+
+
+### When in doubt, flip a coin
+
+The second factor in the 'scheduling' system is for resolving when two pieces of code have equal weight to fit into a given moment of time. Just as is done with the select statements in Go, if two items or more arrive in the buffer before the scheduler inspects them, Go's runtime basically flips a coin.
 
