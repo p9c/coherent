@@ -162,4 +162,6 @@ The kernel can be written in Go, and if structured so memory management is abstr
 
 One of the kernels runs the memory allocation that tracks and selects memory allocations for each process with proximity targeting optimal distance. The other kernels must ask for this memory in order to use it. Though cache coherence in the processor is automated and largely not able to be controlled, its policies and physical architecture are taken into account in order to partition each core and its various shares of the cache levels. This largely falls to simply allocating work of various kinds equally amongst the cores so they have a net equal cache utilisation pattern.
 
-So, this repository will eventually contain the container version of the kernel.
+https://git.sr.ht/~eliasnaur/unik has a nice setup for putting go processes as ring0 in an emulator, this will be used, to first make the single kernel per core and memory allocation kernel running on one of the cores. Compilation must disable the garbage collector so there is no kernel dependencies, so the memory allocator kernel must be written in parallel with the per-core kernel process, all kernels must be given a prescribed amount of memory to work with, which models their segment of the CPU including caches, and is segmented so the kernel knows when memory is in working L1 or outside of it.
+
+...
